@@ -1,0 +1,36 @@
+plugins {
+	id 'java'
+	id 'idea'
+	id("org.springframework.boot") version "3.3.0"
+	id("io.spring.dependency-management") version "1.1.5"
+}
+
+group = "com.machinery"
+version = "0.0.1-SNAPSHOT"
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+	implementation("org.springframework.boot:spring-boot-starter-webflux")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.projectreactor:reactor-test")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	compileOnly 'org.projectlombok:lombok:0.11.0'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.9.8'
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
