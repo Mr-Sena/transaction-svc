@@ -1,0 +1,18 @@
+version: '3.7'
+
+
+volumes:
+  origin_mongo_vol:
+
+services:
+  datasource:
+    container_name: mongo-datasource-host
+    image: mongo:4.2
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dataadm
+      - MONGO_INITDB_DATABASE=transaction
+      - MONGO_INITDB_ROOT_PASSWORD=rootadmin-database
+    ports:
+      - "27017:27017"
+    volumes:
+      - origin_mongo_vol:/data/db

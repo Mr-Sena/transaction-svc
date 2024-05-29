@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://dataadm:rootadmin-database@localhost:27017
+      database: transaction
