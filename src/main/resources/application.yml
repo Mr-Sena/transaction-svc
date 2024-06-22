@@ -3,3 +3,16 @@ spring:
     mongodb:
       uri: mongodb://dataadm:rootadmin-database@localhost:27017
       database: transaction
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans # Permite consultar as referências de beans. // for instance: curl localhost:8080/actuator/beans
+
+transaction:
+  validation:
+    enabled: true
+    banco: true
+    horario: true
