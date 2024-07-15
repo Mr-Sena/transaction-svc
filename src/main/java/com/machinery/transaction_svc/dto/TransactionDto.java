@@ -1,11 +1,13 @@
 package com.machinery.transaction_svc.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,6 +18,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "uuid")
+@ToString(of = {"uuid", "situacao"})
 public class TransactionDto {
 
     @Id
@@ -39,4 +42,26 @@ public class TransactionDto {
     private TipoTransacao tipoTransacao;
 
     private SituacaoEnum situacao;
+
+    public void suspeitaFraude() {
+        situacao = SituacaoEnum.EM_SUSPEITA_FRAUDE;
+    }
+
+    public void analisada() {
+        situacao = SituacaoEnum.ANALISADA;
+    }
+
+    public void emAnaliseHumana() {
+        situacao = SituacaoEnum.EM_ANALISE_HUMANA;
+    }
+
+    @JsonIgnore
+    public boolean isAnalisada() {
+        return this.situacao.equals(SituacaoEnum.ANALISADA);
+    }
+
+    public void aprovarTransferencia() {
+
+        this.situacao = SituacaoEnum.APROVADA;
+    }
 }
