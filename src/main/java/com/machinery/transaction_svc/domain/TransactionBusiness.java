@@ -1,5 +1,6 @@
 package com.machinery.transaction_svc.domain;
 
+import com.machinery.transaction_svc.dto.Conta;
 import com.machinery.transaction_svc.dto.RequestTransactionDto;
 import com.machinery.transaction_svc.dto.TransactionDto;
 import com.machinery.transaction_svc.repositories.TransactionRepository;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -37,6 +39,13 @@ public class TransactionBusiness {
     public void atualizarTransferencia(TransactionDto transfer) {
         log.info("Atualizar transferência: {}", transfer);
         repository.save(transfer);
+    }
+
+
+    public List<TransactionDto> findByConta(final Long codAgencia, final Long codConta) {
+
+        var conta = new Conta(codAgencia, codConta);
+        return repository.findByConta(conta);
     }
 
 
